@@ -25,7 +25,7 @@ const postUser = Router.post(
       if (!user) throw new Error("User with such email doesn't exist");
 
       if (!bcrypt.compareSync(req.body.password, user.password)) throw new Error('Wrong username/password');
-      const token = jwt.sign({ id: user.id }, process.env.SECRET, {
+      const token = jwt.sign({ id: user.id, role: user.role }, process.env.SECRET, {
         expiresIn: 3000,
       });
 
