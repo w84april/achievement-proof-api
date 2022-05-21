@@ -33,7 +33,7 @@ const postUser = Router.post(
         token,
         result: {
           id: user.id,
-          firstName: user.firstName,
+          role: user.role,
         },
       });
     } catch (error) {

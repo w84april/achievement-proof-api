@@ -11,6 +11,7 @@ const postUser = Router.post(
   '/signup',
   check('firstName').isString(),
   check('lastName').isString(),
+  check('fatherName').isString(),
   check('email').isEmail().withMessage('Invalid email'),
   check('password').isString(),
 
@@ -31,6 +32,7 @@ const postUser = Router.post(
         const userCreate = await User.create({
           firstName: req.body.firstName,
           lastName: req.body.lastName,
+          fatherName: req.body.fatherName,
           email: req.body.email,
           password: hash,
         });
@@ -43,7 +45,7 @@ const postUser = Router.post(
           token,
           result: {
             id: userCreate.id,
-            firstName: userCreate.firstName,
+            role: userCreate.role,
           },
         });
       });
