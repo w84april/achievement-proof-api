@@ -17,7 +17,6 @@ async function useControllers() {
     if (path.basename(file.path)[0] === '_' || path.basename(file.path)[0] === '.') return;
     app.use('/', require(file.path));
     controllersCount++;
-    console.log(file.path);
   });
 
   console.log(`Total controllers: ${controllersCount}`);

@@ -1,7 +1,7 @@
 const e = require('express');
 const Router = e.Router();
 const { body, validationResult } = require('express-validator');
-const { Achievement, Image } = require('../../models');
+const { Achievement, Image, User } = require('../../models');
 const authorization = require('../../authorization');
 const multer = require('multer');
 const upload = multer({ dest: './public/data/uploads/' });
@@ -19,10 +19,9 @@ const post = Router.post(
     try {
       const { filename, mimetype, size } = req.file;
       const filepath = req.file.path;
-      console.log(req.file);
-      console.log(req.body);
+
       const errors = validationResult(req);
-      console.log(errors);
+
       if (!errors.isEmpty()) {
         return res.status(422).json({ errors: errors.array()[0].msg });
       }
@@ -33,6 +32,11 @@ const post = Router.post(
         mimetype,
         size,
       });
+      const user = await User.findOne({
+        where: {
+          id: res.locals.id,
+        },
+      });
       const item = await Achievement.create({
         owner: res.locals.id,
         projectName: req.body.projectName,
@@ -40,6 +44,9 @@ const post = Router.post(
         team: req.body.team,
         result: req.body.result,
         event: req.body.event,
+        ownerFirstName: user.firstName,
+        ownerLastName: user.lastName,
+        ownerFatherName: user.fatherName,
       });
       res.send(item);
     } catch (error) {

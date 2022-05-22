@@ -25,8 +25,6 @@ const patch = Router.patch(
       });
       if (!achievement) throw new Error(`Task doesn't exist`);
 
-      console.log('query:', req.query);
-      console.log('body:', req.body);
       const itemToBeEdited = await Achievement.update(
         { approved: req.body.approved },
         {
@@ -34,7 +32,6 @@ const patch = Router.patch(
           returning: true,
         },
       );
-      console.log(itemToBeEdited);
       res.send(itemToBeEdited);
     } catch (error) {
       return res.status(400).json({ error: error.message });

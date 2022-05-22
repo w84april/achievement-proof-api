@@ -25,6 +25,27 @@ module.exports = (sequelize, DataTypes) => {
           notEmpty: true,
         },
       },
+      ownerFirstName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: true,
+        },
+      },
+      ownerLastName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: true,
+        },
+      },
+      ownerFatherName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: true,
+        },
+      },
       team: {
         type: DataTypes.STRING,
         allowNull: true,

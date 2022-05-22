@@ -16,13 +16,11 @@ const postUser = Router.post(
   check('password').isString(),
 
   async (req, res) => {
-    console.log(req.body);
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         return res.status(422).json({ errors: errors.array()[0].msg });
       }
-      console.log(User);
       const checkIfExists = await User.findOne({
         where: { email: req.body.email },
       });

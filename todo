@@ -10,5 +10,15 @@ User should be able to work with his own messages
 Move validation errors processing outside controllers (DRY)
 
 Forntend:
-Add logged user name 
+Add logged user name
 Use destruction instead (props);
+
+role separation:
+
+1.  in projects - admin gets all projects
+2.  buttons
+3.  hide left menu button
+
+search
+modals
+pagination
