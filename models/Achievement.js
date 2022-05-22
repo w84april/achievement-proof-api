@@ -11,6 +11,13 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         defaultValue: DataTypes.UUIDV1,
       },
+      projectName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: true,
+        },
+      },
       owner: {
         type: DataTypes.STRING,
         allowNull: false,
