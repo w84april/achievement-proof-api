@@ -4,6 +4,8 @@ const { Achievement, User } = require('../../models');
 const { query, validationResult } = require('express-validator');
 const amountOfTasks = 10;
 const authorization = require('../../authorization');
+const { Op } = require('sequelize');
+
 const get = Router.get(
   '/achievement',
   authorization,
@@ -28,6 +30,19 @@ const get = Router.get(
       }
       if (role === 0) {
         filter.where = { ...filter.where, owner: res.locals.id };
+      }
+      if (req.query.search !== undefined) {
+        filter.where = {
+          ...filter.where,
+          [Op.or]: [
+            { team: { [Op.like]: `%${req.query.search}%` } },
+            { event: { [Op.like]: `%${req.query.search}%` } },
+            { projectName: { [Op.like]: `%${req.query.search}%` } },
+            { ownerFirstName: { [Op.like]: `%${req.query.search}%` } },
+            { ownerLastName: { [Op.like]: `%${req.query.search}%` } },
+            { ownerFatherName: { [Op.like]: `%${req.query.search}%` } },
+          ],
+        };
       }
       if (req.query.approved !== undefined) {
         filter.where = { ...filter.where, approved: req.query.approved };
