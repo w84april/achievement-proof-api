@@ -11,6 +11,7 @@ const get = Router.get(
   authorization,
   query('sort').optional().isString(),
   query('role').isNumeric(),
+  query('result').isNumeric().optional({ nullable: true, checkFalsy: true }),
   query('approved').isBoolean().optional({ nullable: true, checkFalsy: true }),
   query('search').optional().isString(),
   async (req, res) => {
@@ -43,6 +44,9 @@ const get = Router.get(
             { ownerFatherName: { [Op.like]: `%${req.query.search}%` } },
           ],
         };
+      }
+      if (req.query.result !== undefined) {
+        filter.where = { ...filter.where, result: req.query.result };
       }
       if (req.query.approved !== undefined) {
         filter.where = { ...filter.where, approved: req.query.approved };
