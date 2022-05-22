@@ -8,9 +8,11 @@ const get = Router.get(
   '/achievement',
   authorization,
   query('sort').optional().isString(),
+  query('role').isNumeric(),
   query('approved').isBoolean().optional({ nullable: true, checkFalsy: true }),
   query('search').optional().isString(),
   async (req, res) => {
+    const role = Number(req.query.role);
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
@@ -18,12 +20,15 @@ const get = Router.get(
       }
 
       const filter = {
-        where: {
-          owner: res.locals.id,
-        },
+        where: {},
       };
-      console.log(req.query.approved);
 
+      if (role !== res.locals.role) {
+        return res.status(403).send('Prohibited');
+      }
+      if (role === 0) {
+        filter.where = { ...filter.where, owner: res.locals.id };
+      }
       if (req.query.approved !== undefined) {
         filter.where = { ...filter.where, approved: req.query.approved };
       }
