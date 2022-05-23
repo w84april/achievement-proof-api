@@ -11,6 +11,7 @@ const get = Router.get(
   authorization,
   query('sort').optional().isString(),
   query('role').isNumeric(),
+  query('page').isNumeric(),
   query('result').isNumeric().optional({ nullable: true, checkFalsy: true }),
   query('approved').isNumeric().optional({ nullable: true, checkFalsy: true }),
   query('search').optional().isString(),
@@ -54,8 +55,7 @@ const get = Router.get(
       console.log(filter);
       const items = await Achievement.findAndCountAll({
         limit: amountOfTasks,
-        //offset: (req.query.page - 1) * amountOfTasks,
-        offset: 0,
+        offset: req.query.page * amountOfTasks,
         where: filter.where,
         order: [['createdAt', req.query.sort]],
       });
