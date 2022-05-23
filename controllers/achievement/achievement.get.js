@@ -12,7 +12,7 @@ const get = Router.get(
   query('sort').optional().isString(),
   query('role').isNumeric(),
   query('result').isNumeric().optional({ nullable: true, checkFalsy: true }),
-  query('approved').isBoolean().optional({ nullable: true, checkFalsy: true }),
+  query('approved').isNumeric().optional({ nullable: true, checkFalsy: true }),
   query('search').optional().isString(),
   async (req, res) => {
     const role = Number(req.query.role);

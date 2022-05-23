@@ -7,7 +7,7 @@ const patch = Router.patch(
   '/achievement',
   authorization,
   body('id').isString(),
-  body('approved').isBoolean(),
+  body('approved').isNumeric(),
 
   async (req, res) => {
     try {

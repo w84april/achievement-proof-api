@@ -1,101 +1,100 @@
-module.exports = (sequelize, DataTypes) => {
-  const Achievement = sequelize.define(
-    'Achievement',
-    {
+'use strict';
+
+module.exports = {
+  async up(queryInterface, Sequelize) {
+    return queryInterface.createTable('Achievement', {
       id: {
-        type: DataTypes.UUID,
+        type: Sequelize.DataTypes.UUID,
         allowNull: false,
         validate: {
           notEmpty: true,
         },
         primaryKey: true,
-        defaultValue: DataTypes.UUIDV1,
+        defaultValue: Sequelize.DataTypes.UUIDV1,
       },
       projectName: {
-        type: DataTypes.STRING,
+        type: Sequelize.DataTypes.STRING,
         allowNull: false,
         validate: {
           notEmpty: true,
         },
       },
       owner: {
-        type: DataTypes.STRING,
+        type: Sequelize.DataTypes.STRING,
         allowNull: false,
         validate: {
           notEmpty: true,
         },
       },
       ownerFirstName: {
-        type: DataTypes.STRING,
+        type: Sequelize.DataTypes.STRING,
         allowNull: false,
         validate: {
           notEmpty: true,
         },
       },
       ownerLastName: {
-        type: DataTypes.STRING,
+        type: Sequelize.DataTypes.STRING,
         allowNull: false,
         validate: {
           notEmpty: true,
         },
       },
       ownerFatherName: {
-        type: DataTypes.STRING,
+        type: Sequelize.DataTypes.STRING,
         allowNull: false,
         validate: {
           notEmpty: true,
         },
       },
       team: {
-        type: DataTypes.STRING,
+        type: Sequelize.DataTypes.STRING,
         allowNull: true,
         validate: {
           notEmpty: true,
         },
       },
       result: {
-        type: DataTypes.INTEGER,
+        type: Sequelize.DataTypes.INTEGER,
         allowNull: false,
         validate: {
           notEmpty: true,
         },
       },
       event: {
-        type: DataTypes.STRING,
+        type: Sequelize.DataTypes.STRING,
         allowNull: false,
         validate: {
           notEmpty: true,
         },
       },
       approved: {
-        type: DataTypes.INTEGER,
+        type: Sequelize.DataTypes.INTEGER,
         allowNull: false,
         validate: {
           notEmpty: true,
         },
-        defaultValue: 3,
+        defaultValue: 2,
       },
       file: {
-        type: DataTypes.STRING,
+        type: Sequelize.DataTypes.STRING,
         allowNull: false,
         validate: {
           notEmpty: true,
         },
       },
       createdAt: {
-        type: DataTypes.DATE,
+        type: Sequelize.DataTypes.DATE,
         allowNull: false,
       },
       updatedAt: {
-        type: DataTypes.DATE,
+        type: Sequelize.DataTypes.DATE,
         allowNull: false,
       },
-    },
-    {
-      sequelize,
-      modelName: 'Achievement',
-      freezeTableName: true,
-    },
-  );
-  return Achievement;
+    });
+  },
+
+  async down(queryInterface, Sequelize) {
+    return queryInterface.dropTable('Achievement');
+  },
 };

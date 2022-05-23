@@ -2,7 +2,7 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    return queryInterface.createTable('User', {
+    return queryInterface.createTable('Image', {
       id: {
         type: Sequelize.DataTypes.UUID,
         allowNull: false,
@@ -12,40 +12,46 @@ module.exports = {
         primaryKey: true,
         defaultValue: Sequelize.DataTypes.UUIDV1,
       },
-      firstName: {
+      filename: {
         type: Sequelize.DataTypes.STRING,
         allowNull: false,
         validate: {
           notEmpty: true,
         },
       },
-      lastName: {
+      filepath: {
         type: Sequelize.DataTypes.STRING,
         allowNull: false,
         validate: {
           notEmpty: true,
         },
       },
-      email: {
+      mimetype: {
         type: Sequelize.DataTypes.STRING,
         allowNull: false,
         validate: {
           notEmpty: true,
         },
-        defaultValue: false,
       },
-      password: {
-        type: Sequelize.DataTypes.STRING,
+      size: {
+        type: Sequelize.DataTypes.INTEGER,
         allowNull: false,
         validate: {
           notEmpty: true,
         },
-        defaultValue: false,
+      },
+      createdAt: {
+        type: Sequelize.DataTypes.DATE,
+        allowNull: false,
+      },
+      updatedAt: {
+        type: Sequelize.DataTypes.DATE,
+        allowNull: false,
       },
     });
   },
 
   async down(queryInterface, Sequelize) {
-    return queryInterface.dropTable('User');
+    return queryInterface.dropTable('Image');
   },
 };
