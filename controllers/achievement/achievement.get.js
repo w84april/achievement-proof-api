@@ -14,7 +14,7 @@ const get = Router.get(
   query('page').isNumeric(),
   query('result').isNumeric().optional({ nullable: true, checkFalsy: true }),
   query('approved').isNumeric().optional({ nullable: true, checkFalsy: true }),
-  query('search').optional().isString(),
+  query('search').isString().optional({ nullable: true, checkFalsy: true }),
   async (req, res) => {
     const role = Number(req.query.role);
     try {
@@ -57,7 +57,7 @@ const get = Router.get(
         limit: amountOfTasks,
         offset: req.query.page * amountOfTasks,
         where: filter.where,
-        order: [['createdAt', req.query.sort]],
+        order: [['createdAt', req.query.sort || 'ASC']],
       });
 
       res.send(items);
