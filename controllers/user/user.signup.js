@@ -17,12 +17,10 @@ const postUser = Router.post(
 
   async (req, res) => {
     try {
-      console.log(req.body);
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         return res.status(422).json({ errors: errors.array()[0].msg });
       }
-      console.log('here');
       const checkIfExists = await User.findOne({
         where: { email: req.body.email },
       });
