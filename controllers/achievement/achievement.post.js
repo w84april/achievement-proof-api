@@ -41,7 +41,7 @@ const post = Router.post(
         owner: res.locals.id,
         projectName: req.body.projectName,
         file: image.filename,
-        team: req.body.team,
+        team: req.body.team || null,
         result: req.body.result,
         event: req.body.event,
         ownerFirstName: user.firstName,

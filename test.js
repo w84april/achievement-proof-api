@@ -1,6 +1,4 @@
-const app = require('./app.js');
 const supertest = require('supertest');
-const user = require('./controllers/user/user.signup');
 const requestWithSupertest = supertest('http://localhost:3014');
 
 describe('User Endpoints', () => {
