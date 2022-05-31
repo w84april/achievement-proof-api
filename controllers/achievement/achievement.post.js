@@ -47,6 +47,7 @@ const post = Router.post(
         ownerFirstName: user.firstName,
         ownerLastName: user.lastName,
         ownerFatherName: user.fatherName,
+        address: user.address,
       });
       res.send(item);
     } catch (error) {

@@ -5,7 +5,6 @@ const { User } = require('../../models');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const jwt = require('jsonwebtoken');
-const { user } = require('pg/lib/defaults');
 
 const postUser = Router.post(
   '/signup',

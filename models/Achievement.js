@@ -82,6 +82,10 @@ module.exports = (sequelize, DataTypes) => {
           notEmpty: true,
         },
       },
+      address: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
       createdAt: {
         type: DataTypes.DATE,
         allowNull: false,
